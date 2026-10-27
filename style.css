@@ -182,3 +182,9 @@ header.hide{transform:translateY(calc(-100% - env(safe-area-inset-top,0px)))}
 .p:hover::before{opacity:0}
 }
 @media(prefers-reduced-motion:reduce){.p,.p .bg{transition:none}}
+
+/* contact cards: 3 per row, names under title */
+.cg{grid-template-columns:repeat(3,1fr)}
+.cc .nm{display:block;font-style:normal;font-weight:700;color:var(--or);margin:.1rem 0 .2rem}
+@media(max-width:800px){.cg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.cg{grid-template-columns:1fr}}
