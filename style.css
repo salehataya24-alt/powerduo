@@ -173,7 +173,12 @@ header.hide{transform:translateY(calc(-100% - env(safe-area-inset-top,0px)))}
 .p .cta{flex-shrink:0;white-space:nowrap}
 @media(max-width:700px){
 .p h2{width:min(86vw,440px)}
+.sv .p.pa,.sv .p.pb{background:#0b1f3a}
 .p{transition:flex-grow .3s ease-out}
-.p .bg{transition:transform .35s ease-out,filter .3s ease-out;width:100vw;height:100%;min-height:260px}
+/* image keeps one fixed size (never re-laid out) so no empty gap can appear while panels grow */
+.p .bg{height:max(calc(100vh - 60px),520px);width:100vw;filter:none;transform:translate(-50%,-50%);transition:none;will-change:auto}
+.p:hover .bg{transform:translate(-50%,-50%);filter:none}
+.p::before{content:"";position:absolute;inset:0;background:#3b4658;opacity:.72;z-index:1;pointer-events:none;transition:opacity .3s ease-out;will-change:opacity}
+.p:hover::before{opacity:0}
 }
 @media(prefers-reduced-motion:reduce){.p,.p .bg{transition:none}}
