@@ -160,3 +160,19 @@ header.hide{transform:translateY(calc(-100% - env(safe-area-inset-top,0px)))}
 /* offer details button: orange border */
 .dt{align-self:flex-start;background:transparent;color:var(--or);border:2px solid var(--or);border-radius:10px;padding:.55rem 1.8rem;font:800 1.05rem Cairo,sans-serif;cursor:pointer;transition:.3s}
 .dt:hover{background:var(--or);color:#fff;transform:scale(1.05)}
+
+/* eng credit */
+.eng{font-size:.9rem;opacity:.85;font-weight:600;margin-top:-.4rem;animation:up 1s .7s both}
+
+/* smooth services hover: no per-frame reflow of text/images, GPU-friendly */
+.p{filter:none;transition:flex-grow .6s cubic-bezier(.22,.8,.3,1);contain:paint;isolation:isolate}
+.p:hover{filter:none}
+.p::before{content:"";position:absolute;inset:0;background:#2b3648;opacity:.62;mix-blend-mode:saturation;z-index:1;transition:opacity .6s ease;pointer-events:none;will-change:opacity}
+.p:hover::before{opacity:0}
+.p::after{z-index:0}
+.p .bg{left:50%;top:50%;width:100vw;height:max(calc(100vh - 60px),520px);inset:auto;left:50%;top:50%;transform:translate(-50%,-50%) scale(1);transition:transform .8s cubic-bezier(.22,.8,.3,1);will-change:transform}
+.p:hover .bg{transform:translate(-50%,-50%) scale(1.08)}
+.p h2{width:clamp(240px,30vw,440px);max-width:none;flex-shrink:0;will-change:transform}
+.p .cta{flex-shrink:0;white-space:nowrap}
+@media(max-width:700px){.p h2{width:min(86vw,440px)}}
+@media(prefers-reduced-motion:reduce){.p,.p::before,.p .bg{transition:none}}
