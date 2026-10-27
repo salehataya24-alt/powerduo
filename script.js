@@ -88,3 +88,12 @@ upd();
 let ly=scrollY;const hd=$('header');
 addEventListener('scroll',()=>{const y=scrollY;
 if(y>80&&y>ly+4)hd.classList.add('hide');else if(y<ly-4||y<=80)hd.classList.remove('hide');ly=y},{passive:true});
+
+/* mobile: services expand one after the other while scrolling */
+(()=>{const sv=$('.sv'),ps=$$('.sv .p'),mq=matchMedia('(max-width:700px)');let tk=0;
+function up(){tk=0;let a=-1;
+if(mq.matches){const r=sv.getBoundingClientRect(),p=(innerHeight*.5-r.top)/r.height;
+if(p>.04&&p<.96)a=p<.5?0:1}
+ps.forEach((e,i)=>e.classList.toggle('act',i==a));sv.classList.toggle('ha',a>=0)}
+const rq=()=>{if(!tk)tk=requestAnimationFrame(up)};
+addEventListener('scroll',rq,{passive:true});addEventListener('resize',rq);up()})();
