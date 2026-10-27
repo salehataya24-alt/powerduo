@@ -39,7 +39,7 @@ $('#wz').innerHTML=cur.steps.map(s=>`<div class="st">${s.map(fld).join('')}</div
 <div class="f"><b>المنطقة</b><select id="cr"><option>دمشق</option><option>ريف دمشق</option></select></div>
 <div class="f"><b>رقم الواتساب</b><input type="tel" id="cp" dir="ltr"></div>
 <div class="f"><b>ملاحظات إضافية</b><textarea id="cx" rows="3"></textarea></div>
-<small>بعد الإرسال سيُفتح واتساب برسالة جاهزة؛ أرفق الصور والمخططات داخل المحادثة إن وجدت.</small></div>`;
+<small>بعد الإرسال سيُفتح واتساب برسالة جاهزة. إن أرفقت صوراً فستظهر قائمة مشاركة على الموبايل: اختر واتساب ثم محادثة Power duo. وعلى الكمبيوتر أرفق الصور يدوياً داخل المحادثة.</small></div>`;
 $('#ov').classList.add('on');show()}
 function cl(){$('#ov').classList.remove('on')}
 function show(){const s=$$('#wz .st'),L=s.length-1;s.forEach((e,i)=>e.classList.toggle('on',i==idx));
@@ -59,6 +59,9 @@ else if(t=='r'||t=='c')v=[...f.querySelectorAll('input:checked')].map(i=>i.value
 else{v=[...f.querySelector('input[type=file]').files].map(x=>x.name).join('، ');const c=f.querySelector('input[type=checkbox]:checked');if(c)v+=(v?'، ':'')+c.value}
 if(v)m+=`\n*${f.dataset.l}*\n${v}\n`});
 const n=$('#cx').value.trim();if(n)m+=`\n*ملاحظات إضافية*\n${n}`;
+const fl=$$('#wz input[type=file]').flatMap(i=>[...i.files]);
+if(fl.length&&navigator.canShare&&navigator.canShare({files:fl})){
+navigator.share({files:fl,text:m}).catch(e=>{if(e.name!='AbortError')wa(m)});cl();return}
 wa(m);cl()}
 
 /* offers + contact form */
